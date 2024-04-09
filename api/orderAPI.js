@@ -2,8 +2,8 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getAllOrders = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/orders`, {
+const getOrders = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/orderWithType`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -89,5 +89,5 @@ const updateOrder = (payload, orderId) => new Promise((resolve, reject) => {
 });
 
 export {
-  getAllOrders, getOrderDetails, createOrder, closeOrder, deleteOrder, updateOrder,
+  getOrders, getOrderDetails, createOrder, closeOrder, deleteOrder, updateOrder,
 };
