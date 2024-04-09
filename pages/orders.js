@@ -14,12 +14,11 @@ function ShowOrders() {
   useEffect(() => {
     getAllOrders();
   }, []);
-  console.warn(orders);
 
   return (
     <div className="text-center my-4">
       <h1 className="header">Orders</h1>
-      <Link href="/orders/new" passHref>
+      <Link href="/order/new" passHref>
         <Button size="sm" variant="outline-info" className="createOrderBtn">Start New Order</Button>
       </Link>
       <div className="orderView">
