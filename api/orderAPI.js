@@ -21,7 +21,7 @@ const getOrders = () => new Promise((resolve, reject) => {
 });
 
 const getOrderDetails = (orderId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/orders/${orderId}`, {
+  fetch(`${endpoint}/orders/items/${orderId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
