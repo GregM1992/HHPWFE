@@ -3,15 +3,33 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
-import { getOrderDetails } from '../../api/orderAPI';
+import { getOrderDetails, getOrderStatus } from '../../api/orderAPI';
 import getItems from '../../api/itemAPI';
 import OrderItemCard from '../../components/cards/OrderItemCard';
 import ItemCard from '../../components/cards/ItemCard';
+import { addItemToOrder } from '../../api/orderItemAPI';
 
 export default function ViewOrderDetails() {
   const [orderDetails, setOrderDetails] = useState([]);
+  const [orderStatus, setOrderStatus] = useState([]);
   const router = useRouter();
   const { id } = router.query;
+
+  const showOrderDetails = () => {
+    getOrderDetails(id).then(setOrderDetails);
+  };
+
+  const retrieveOrderStatus = () => {
+    getOrderStatus(id).then(setOrderStatus);
+  };
+
+  useEffect(() => {
+    retrieveOrderStatus();
+  }, []);
+
+  useEffect(() => {
+    showOrderDetails();
+  }, []);
 
   function AddItemModal() {
     const [show, setShow] = useState(false);
@@ -25,15 +43,30 @@ export default function ViewOrderDetails() {
       showMenuItems();
     }, []);
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => {
+      setShow(false);
+      showOrderDetails();
+    };
+
     const handleShow = () => setShow(true);
-    // set ternary to remove add item button if order is closed
+
+    const addItem = (item) => {
+      const payload = {
+        orderId: router.query.id,
+        itemId: item,
+      };
+      addItemToOrder(payload).then(() => {
+        showOrderDetails();
+      });
+      handleClose();
+    };
     return (
       <>
-        <Button variant="primary" onClick={handleShow}>
-          Add Item
-        </Button>
-
+        {!orderStatus[0] ? (
+          <Button variant="secondary" onClick={handleShow}>
+            Add Item
+          </Button>
+        ) : (<p>Order is closed</p>)}
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Menu</Modal.Title>
@@ -41,36 +74,29 @@ export default function ViewOrderDetails() {
           <Modal.Body>
             <Container>
               {menuItems.map((menuItem) => (
-                <ItemCard key={menuItems.id} itemObj={menuItem} onUpdate={showMenuItems} />
+                <div key={menuItem.id}>
+                  <ItemCard itemObj={menuItem} onUpdate={showMenuItems} />
+                  <Button
+                    variant="primary"
+                    onClick={() => {
+                      addItem(menuItem.id);
+                    }}
+                  >
+                    Add to Order
+                  </Button>
+                </div>
               ))}
-
             </Container>
           </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
         </Modal>
       </>
     );
   }
 
-  const showOrderDetails = () => {
-    getOrderDetails(id).then(setOrderDetails);
-  };
-
-  useEffect(() => {
-    showOrderDetails();
-  }, []);
-
   return (
     <>
       <div className="orderDetailsDiv">
-        <AddItemModal />
+        <AddItemModal onUpdate={showOrderDetails} />
         {orderDetails.map((item) => (
           <OrderItemCard className="itemCard" key={item.orderItemId} orderItemObj={item} onUpdate={showOrderDetails} />
         ))}
