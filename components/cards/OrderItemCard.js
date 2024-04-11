@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useRouter } from 'next/router';
-import { deleteOrder } from '../../api/orderAPI';
+import { removeItemFromOrder } from '../../api/orderItemAPI';
 
 function OrderItemCard({ orderItemObj, onUpdate }) {
   const router = useRouter();
 
   const deleteThisItem = () => {
     if (window.confirm(`Delete ${orderItemObj.name}?`)) {
-      deleteOrder(orderItemObj.orderItemId).then(() => {
+      removeItemFromOrder(orderItemObj.orderItemId).then(() => {
         onUpdate();
-        router.push(`/orders/${orderItemObj.orderId}`);
+        router.push(`/order/${orderItemObj.orderId}`);
       });
     }
   };
@@ -22,7 +22,7 @@ function OrderItemCard({ orderItemObj, onUpdate }) {
       <Card.Body>
         <Card.Title>{orderItemObj.name}</Card.Title>
         <Card.Text>
-          {orderItemObj.price}$
+          {orderItemObj.price}.00$
         </Card.Text>
         {orderItemObj.isClosed ? (
           <p> </p>) : <Button variant="secondary" onClick={deleteThisItem}>Delete</Button>}
