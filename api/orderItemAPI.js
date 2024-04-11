@@ -15,15 +15,13 @@ const addItemToOrder = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const removeItemFromOrder = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/order/removeItem`, {
-    method: 'POST',
+const removeItemFromOrder = (orderItemId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/order/removeById/${orderItemId}`, {
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(payload),
   })
-    .then((response) => response.json())
     .then((data) => resolve(data))
     .catch(reject);
 });
