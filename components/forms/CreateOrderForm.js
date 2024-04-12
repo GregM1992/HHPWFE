@@ -10,6 +10,7 @@ const initialState = {
   customerName: '',
   customerPhone: '',
   customerEmail: '',
+  orderTypeId: 1,
 };
 
 function CreateOrderForm({ orderObj }) {
@@ -43,6 +44,7 @@ function CreateOrderForm({ orderObj }) {
       .catch((error) => {
         console.error('Failed to create order', error);
       });
+    console.warn(formInput);
   };
 
   return (
@@ -86,7 +88,6 @@ function CreateOrderForm({ orderObj }) {
         value={formInput.orderTypeId}
         required
       >
-        <option value="" label="Choose Order Type" disabled />
         {
           orderTypes.map((orderType) => (
             <option

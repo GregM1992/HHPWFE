@@ -56,6 +56,24 @@ const getOrderDetails = (orderId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getOrderTotal = (orderId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/orderTotal/${orderId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
+    .catch(reject);
+});
+
 const createOrder = (payload) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/orders`, {
     method: 'POST',
@@ -108,5 +126,5 @@ const updateOrder = (payload, orderId) => new Promise((resolve, reject) => {
 
 export {
   getOrders, getOrderDetails, createOrder, closeOrder, deleteOrder, updateOrder,
-  getOrderStatus,
+  getOrderStatus, getOrderTotal,
 };
