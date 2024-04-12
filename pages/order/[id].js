@@ -113,9 +113,16 @@ export default function ViewOrderDetails() {
             onUpdate={fetchData}
           />
         ))}
-        <h2> Subtotal: {orderTotal[0]}.00$ </h2>
       </div>
-      <Button onClick={payButton}>Go to payment</Button>
+      {!orderStatus[0] ? (<h2> Subtotal: {orderTotal[0]}.00$ </h2>) : (
+        <>
+          <h2>
+            Tip: {orderTotal[2]}.00$
+          </h2>
+          <h2> Total: {orderTotal[1]}.00$ </h2>
+        </>
+      )}
+      {!orderStatus[0] ? (<Button onClick={payButton}>Go to payment</Button>) : <p> </p>}
     </>
   );
 }
