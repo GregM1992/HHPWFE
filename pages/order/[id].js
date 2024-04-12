@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Container from 'react-bootstrap/Container';
-import { getOrderDetails, getOrderStatus } from '../../api/orderAPI';
+import { getOrderDetails, getOrderStatus, getOrderTotal } from '../../api/orderAPI';
 import getItems from '../../api/itemAPI';
 import OrderItemCard from '../../components/cards/OrderItemCard';
 import ItemCard from '../../components/cards/ItemCard';
@@ -12,24 +12,32 @@ import { addItemToOrder } from '../../api/orderItemAPI';
 export default function ViewOrderDetails() {
   const [orderDetails, setOrderDetails] = useState([]);
   const [orderStatus, setOrderStatus] = useState([]);
+  const [orderTotal, setOrderTotal] = useState([]);
   const router = useRouter();
   const { id } = router.query;
 
-  const showOrderDetails = () => {
-    getOrderDetails(id).then(setOrderDetails);
-  };
+  const fetchData = async () => {
+    try {
+      const details = await getOrderDetails(id);
+      setOrderDetails(details);
 
-  const retrieveOrderStatus = () => {
-    getOrderStatus(id).then(setOrderStatus);
+      const total = await getOrderTotal(id);
+      setOrderTotal(total);
+
+      const status = await getOrderStatus(id);
+      setOrderStatus(status);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   useEffect(() => {
-    retrieveOrderStatus();
-  }, []);
+    fetchData();
+  }, [orderDetails.id]);
 
-  useEffect(() => {
-    showOrderDetails();
-  }, []);
+  const payButton = () => {
+    router.push(`/order/pay/${router.query.id}`);
+  };
 
   function AddItemModal() {
     const [show, setShow] = useState(false);
@@ -45,7 +53,7 @@ export default function ViewOrderDetails() {
 
     const handleClose = () => {
       setShow(false);
-      showOrderDetails();
+      fetchData();
     };
 
     const handleShow = () => setShow(true);
@@ -56,7 +64,7 @@ export default function ViewOrderDetails() {
         itemId: item,
       };
       addItemToOrder(payload).then(() => {
-        showOrderDetails();
+        fetchData();
       });
       handleClose();
     };
@@ -96,11 +104,18 @@ export default function ViewOrderDetails() {
   return (
     <>
       <div className="orderDetailsDiv">
-        <AddItemModal onUpdate={showOrderDetails} />
+        <AddItemModal onUpdate={fetchData} />
         {orderDetails.map((item) => (
-          <OrderItemCard className="itemCard" key={item.orderItemId} orderItemObj={item} onUpdate={showOrderDetails} />
+          <OrderItemCard
+            className="itemCard"
+            key={item.orderItemId}
+            orderItemObj={item}
+            onUpdate={fetchData}
+          />
         ))}
+        <h2> Subtotal: {orderTotal[0]}.00$ </h2>
       </div>
+      <Button onClick={payButton}>Go to payment</Button>
     </>
   );
 }

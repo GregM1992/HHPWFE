@@ -5,7 +5,9 @@ import Card from 'react-bootstrap/Card';
 import { useRouter } from 'next/router';
 import { removeItemFromOrder } from '../../api/orderItemAPI';
 
-function OrderItemCard({ orderItemObj, onUpdate }) {
+function OrderItemCard({
+  orderItemObj, onUpdate,
+}) {
   const router = useRouter();
 
   const deleteThisItem = () => {
