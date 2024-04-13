@@ -124,7 +124,25 @@ const updateOrder = (payload, orderId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getRevenue = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/revenue`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve((data));
+      } else {
+        resolve({});
+      }
+    })
+    .catch(reject);
+});
+
 export {
   getOrders, getOrderDetails, createOrder, closeOrder, deleteOrder, updateOrder,
-  getOrderStatus, getOrderTotal,
+  getOrderStatus, getOrderTotal, getRevenue,
 };
