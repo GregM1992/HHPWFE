@@ -99,7 +99,7 @@ function CreateOrderForm({ orderObj }) {
         }
       </Form.Select>
 
-      <Button type="submit" variant="primary">
+      <Button type="submit" variant="secondary">
         {orderObj.id ? 'Update' : 'Start'} Order
       </Button>
     </Form>

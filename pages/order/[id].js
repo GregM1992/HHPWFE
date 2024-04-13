@@ -85,7 +85,7 @@ export default function ViewOrderDetails() {
                 <div key={menuItem.id}>
                   <ItemCard itemObj={menuItem} onUpdate={showMenuItems} />
                   <Button
-                    variant="primary"
+                    variant="secondary"
                     onClick={() => {
                       addItem(menuItem.id);
                     }}
