@@ -1,26 +1,36 @@
 import { Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
+import pizzaLogo from '../assets/Updated.png';
+import header from '../assets/bigger knifeys pizza.png';
 
 function Home() {
   const { user } = useAuth();
   const router = useRouter();
+
   return (
     <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
+      className="welcomePage"
       style={{
         height: '90vh',
         padding: '30px',
-        maxWidth: '400px',
+        maxWidth: '800px',
         margin: '0 auto',
       }}
     >
-      <h1>Hello {user.fbUser.displayName}! </h1>
+      <h3 className="welcome">Hello {user.fbUser.displayName}! </h3>
       <>
-        <h2> Welcome to HIP HOP PIZZA AND WINGS</h2>
+        <h2 className="welcome2"> Welcome to</h2>
+        <div className="knifeyFont">
+          <Image src={header} />
+        </div>
+        <div className="knifeyLogo">
+          <Image src={pizzaLogo} />
+        </div>
         <Button
-          variant="secondary"
+          variant="secondary-outline"
           className="homeButton"
           onClick={() => {
             router.push('/order/new');
@@ -28,7 +38,7 @@ function Home() {
         > Create New Order
         </Button>
         <Button
-          variant="secondary"
+          variant="secondary-outline"
           className="homeButton"
           onClick={() => {
             router.push('/orders');
@@ -36,7 +46,7 @@ function Home() {
         > Orders
         </Button>
         <Button
-          variant="secondary"
+          variant="secondary-outline"
           className="homeButton"
           onClick={() => {
             router.push('/revenue');
@@ -44,8 +54,13 @@ function Home() {
         > Revenue
         </Button>
       </>
-      <p>Click the button below to logout!</p>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+      <Button
+        variant="danger-outline"
+        type="button"
+        size="lg"
+        className="signout-btn"
+        onClick={signOut}
+      >
         Sign Out
       </Button>
     </div>

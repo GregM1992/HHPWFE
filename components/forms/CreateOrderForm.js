@@ -48,12 +48,13 @@ function CreateOrderForm({ orderObj }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <h2>{orderObj.id ? 'Edit Order' : 'Add Order'}</h2>
+    <Form onSubmit={handleSubmit} className="orderForm">
+      <h2 className="addOrder">{orderObj.id ? 'Edit Order' : 'Add Order'}</h2>
 
       <Form.Group controlId="customerName" className="mb-3">
-        <Form.Label>Customer Name</Form.Label>
+        <Form.Label className="orderFormLabel">Customer Name</Form.Label>
         <Form.Control
+          className="orderInput"
           type="text"
           name="customerName"
           value={formInput.customerName}
@@ -62,8 +63,9 @@ function CreateOrderForm({ orderObj }) {
         />
       </Form.Group>
       <Form.Group controlId="customerPhone" className="mb-3">
-        <Form.Label>Customer Phone</Form.Label>
+        <Form.Label className="orderFormLabel">Customer Phone</Form.Label>
         <Form.Control
+          className="orderInput"
           type="text"
           name="customerPhone"
           value={formInput.customerPhone}
@@ -72,8 +74,9 @@ function CreateOrderForm({ orderObj }) {
         />
       </Form.Group>
       <Form.Group controlId="customerEmail" className="mb-3">
-        <Form.Label>Customer Email</Form.Label>
+        <Form.Label className="orderFormLabel">Customer Email</Form.Label>
         <Form.Control
+          className="orderInput"
           type="text"
           name="customerEmail"
           value={formInput.customerEmail}
@@ -81,6 +84,7 @@ function CreateOrderForm({ orderObj }) {
           required
         />
       </Form.Group>
+      <Form.Label className="orderFormLabel">Order Type</Form.Label>
       <Form.Select
         name="orderTypeId"
         onChange={handleChange}

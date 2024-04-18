@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 function ItemCard({ itemObj }) {
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card className="menuItem" style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>{itemObj.name}</Card.Title>
         <Card.Text>

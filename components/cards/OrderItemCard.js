@@ -20,14 +20,14 @@ function OrderItemCard({
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Body>
-        <Card.Title>{orderItemObj.name}</Card.Title>
+    <Card className="orderItemCard" style={{ width: '18rem' }}>
+      <Card.Body className="itemCard">
+        <Card.Title className="orderItemHeader">{orderItemObj.name}</Card.Title>
         <Card.Text>
           {orderItemObj.price}.00$
         </Card.Text>
         {orderItemObj.isClosed ? (
-          <p> </p>) : <Button variant="secondary" onClick={deleteThisItem}>Delete</Button>}
+          <p> </p>) : <Button className="orderItemDeleteBtn" variant="outline-dark" onClick={deleteThisItem}>Delete</Button>}
       </Card.Body>
     </Card>
   );

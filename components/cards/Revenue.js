@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 function Revenue({ revenueObj }) {
   return (
     <>
-      <h1>Total Revenue:</h1>
-      <h2>{revenueObj.total}.00$</h2>
-      <h1>Total from items:</h1>
-      <h2>{revenueObj.totalFromItems}.00$</h2>
-      <h1>Total tips:</h1>
-      <h2>{revenueObj.tips}.00$</h2>
-      <h3>Call ins: {revenueObj.callIns}</h3>
-      <h3>Walk ins: {revenueObj.walkIns}</h3>
+      <div className="revenueCard">
+        <h1>Total Revenue:</h1>
+        <h2 className="total">{revenueObj.total}.00$</h2>
+        <h1>Total from items:</h1>
+        <h2 className="itemTotal">{revenueObj.totalFromItems}.00$</h2>
+        <h1>Total tips:</h1>
+        <h2 className="tips">{revenueObj.tips}.00$</h2>
+        <h3>Call ins: {revenueObj.callIns}</h3>
+        <h3>Walk ins: {revenueObj.walkIns}</h3>
+      </div>
     </>
   );
 }

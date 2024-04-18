@@ -2,19 +2,29 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Navbar, //
+  Navbar,
   Container,
   Nav,
-  Button,
 } from 'react-bootstrap';
-import { signOut } from '../utils/auth';
+import Image from 'next/image';
+
+import navbarlogo from '../assets/BWPL.png';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar className="navBar" collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
+        <Image
+          className="navLogo"
+          alt="navLogo"
+          src={navbarlogo}
+          width="65px"
+          height="65px"
+        />
         <Link passHref href="/">
-          <Navbar.Brand>HHPW</Navbar.Brand>
+          <Navbar.Brand>
+            KNIFEYS PIZZA
+          </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -29,9 +39,6 @@ export default function NavBar() {
             <Link passHref href="/revenue">
               <Nav.Link>Revenue</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>
-              Sign Out
-            </Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
