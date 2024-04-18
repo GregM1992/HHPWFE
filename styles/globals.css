@@ -1,13 +1,195 @@
 @import 'bootstrap/dist/css/bootstrap.css';
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap');
+
 
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+  color: rgb(252, 252, 252);
+  padding: 0px;
+  
+  font-family: -apple-system, Castoro Titling, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    
+}
+.signout-btn{
+  font-family: Castoro Titling;
+  color: rgb(251, 0, 0);
+}
+.welcomePage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.welcome{
+  font-weight: bold;
+}
+.welcome2{
+  font-family: Castoro Titling;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+.orderView{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 50px;
+}
+.knifeyLogo{
+  position: relative;
+  max-width: 300px;
+  max-width: 300px;
+}
+.createOrderBtn{
+  margin-top: 15px;
+  font-weight: bold;
+}
+.navLogo{
+  margin: 0;
+}
+.orderCardBody{
+  margin: 20px;
+  font-weight: bold;
+  opacity: 90%;
+}
+.cardBorder{
+  border: 2px, solid, black;
+  border-style: solid;
+  margin: 2px;
+  border-radius: 5px;
 }
 
+.addItemModalBtn{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  
+}
+.orderCardBtn{
+  margin-right: 5px;
+}
+.orderCardDeleteBtn{
+  background-color: #000000 !important;
+}
+
+.customerName{
+  font-weight: bold;
+}
+.customerNumber{
+  margin-top: 10px;
+}
+.orderStatus{
+  margin-bottom: 0;
+}
+.orderHeader{
+  margin-top: 45px;
+}
+.orderForm{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  margin-top: 40px;
+}
+.orderInput{
+  margin-bottom: 20px;
+
+}
+.addOrder{
+  margin-bottom: 30px;
+  margin-top: 0;
+}
+.chooseOrderType{
+  width: 150px;
+}
+.orderDetailsDiv{
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 45px;
+}
+.closeOrderForm{
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+}
+.closeOrderHeader{
+  margin: 50px;
+}
+.justTheItems{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 800px;
+  font-weight: bold;
+}
+.orderItemDeleteBtn{
+  font-weight: bold;
+}
+.orderItemCard{
+  margin: 20px;
+}
+.itemCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.homeButton{
+  display: flex;
+  justify-content: center;
+  color: white;
+  margin: 10px;
+  font-size: larger;
+}
+.menu{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-color: #1d1d1d;
+  width: 700px;
+}
+
+.menuItemDiv{
+  display: flex;
+  flex-wrap: wrap;
+}
+.menuItem{
+  text-align: center;
+  margin: 10px
+}
+.menuBtn{
+  color: #ffffff;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  justify-content: center;
+  margin-left: 85px;
+}
+.revenueCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 150px;
+  border: 30px, solid, white;
+  border-style: solid;
+  border-radius: 20px;
+  padding: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+.total{
+  margin-bottom: 30px;
+}
+.itemTotal{
+  margin-bottom: 30px;
+}
+.tips{
+  margin-bottom: 30px;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -17,6 +199,9 @@ a {
   box-sizing: border-box;
 }
 
+
 body {
-  background-color: #67282b;
+  background-color: #000000;
+  color: rgb(252, 252, 252);
+  
 }

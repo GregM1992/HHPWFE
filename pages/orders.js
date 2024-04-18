@@ -17,9 +17,9 @@ function ShowOrders() {
 
   return (
     <div className="text-center my-4">
-      <h1 className="header">Orders</h1>
+      <h1 className="orderHeader">Orders</h1>
       <Link href="/order/new" passHref>
-        <Button size="sm" variant="outline-info" className="createOrderBtn">Start New Order</Button>
+        <Button size="sm" variant="outline-light" className="createOrderBtn">Start New Order</Button>
       </Link>
       <div className="orderView">
         {orders.map((order) => (

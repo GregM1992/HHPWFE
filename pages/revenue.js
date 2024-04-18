@@ -9,6 +9,7 @@ function ShowRevenue() {
     getRevenue().then(setRevenue);
   };
 
+  console.warn(revenue);
   useEffect(() => {
     getAllRevenue();
   }, []);

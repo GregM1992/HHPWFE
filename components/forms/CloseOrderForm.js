@@ -42,8 +42,8 @@ function CloseOrderForm({ orderObj }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <h2>Add Tip</h2>
+    <Form className="closeOrderForm" onSubmit={handleSubmit}>
+      <h2 className="closeOrderHeader">Add Tip</h2>
 
       <Form.Group controlId="customerName" className="mb-3">
         <Form.Label>Tip</Form.Label>

@@ -19,23 +19,23 @@ function OrderCard({ orderObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Body>
-        <Card.Title>{orderObj.customerName}</Card.Title>
-        <Card.Text>
+    <Card className="orderCardBody" style={{ width: '18rem' }}>
+      <Card.Body className="cardBorder">
+        <Card.Title className="customerName">{orderObj.customerName}</Card.Title>
+        <Card.Text className="customerNumber">
           {orderObj.customerPhone}
         </Card.Text>
         <Card.Text>
           {orderObj.orderType.type}
         </Card.Text>
-        <Card.Text>
+        <Card.Text className="orderStatus">
           Order Status:
         </Card.Text>
         {orderObj.isClosed ? (
           <p> Closed </p>) : <p> Open </p>}
+        <Button variant="secondary" className="orderCardBtn" onClick={pushToDetails}>View Order</Button>
         {orderObj.isClosed ? (
-          <p> </p>) : <Button variant="secondary" onClick={deleteThisOrder}>Delete</Button>}
-        <Button variant="secondary" onClick={pushToDetails}>View Order</Button>
+          <p> </p>) : <Button variant="secondary" className="orderCardDeleteBtn" onClick={deleteThisOrder}>Delete</Button>}
       </Card.Body>
     </Card>
   );

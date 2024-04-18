@@ -70,22 +70,25 @@ export default function ViewOrderDetails() {
     };
     return (
       <>
-        {!orderStatus[0] ? (
-          <Button variant="secondary" onClick={handleShow}>
-            Add Item
-          </Button>
-        ) : (<p>Order is closed</p>)}
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Menu</Modal.Title>
+        <div className="addItemModalBtn">
+          {!orderStatus[0] ? (
+            <Button className="addItemBtn" variant="outline-light" onClick={handleShow}>
+              Add Item
+            </Button>
+          ) : (<p>Order is closed</p>)}
+        </div>
+        <Modal className="modalBody" show={show} onHide={handleClose} centered>
+          <Modal.Header className="menu">
+            <Modal.Title className="menu">Menu</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <Container>
+          <Modal.Body className="menu">
+            <Container className="menuItemDiv">
               {menuItems.map((menuItem) => (
                 <div key={menuItem.id}>
                   <ItemCard itemObj={menuItem} onUpdate={showMenuItems} />
                   <Button
-                    variant="secondary"
+                    className="menuBtn"
+                    variant="outline-secondary"
                     onClick={() => {
                       addItem(menuItem.id);
                     }}
@@ -104,25 +107,28 @@ export default function ViewOrderDetails() {
   return (
     <>
       <div className="orderDetailsDiv">
-        <AddItemModal onUpdate={fetchData} />
-        {orderDetails.map((item) => (
-          <OrderItemCard
-            className="itemCard"
-            key={item.orderItemId}
-            orderItemObj={item}
-            onUpdate={fetchData}
-          />
-        ))}
+        <div>
+          <AddItemModal onUpdate={fetchData} />
+          <div className="justTheItems">
+            {orderDetails.map((item) => (
+              <OrderItemCard
+                key={item.orderItemId}
+                orderItemObj={item}
+                onUpdate={fetchData}
+              />
+            ))}
+          </div>
+        </div>
+        {!orderStatus[0] ? (<h2> Subtotal: {orderTotal[0]}.00$ </h2>) : (
+          <>
+            <h2>
+              Tip: {orderTotal[2]}.00$
+            </h2>
+            <h2> Total: {orderTotal[1]}.00$ </h2>
+          </>
+        )}
+        {!orderStatus[0] ? (<Button variant="outline-light" onClick={payButton}>Go to payment</Button>) : <p> </p>}
       </div>
-      {!orderStatus[0] ? (<h2> Subtotal: {orderTotal[0]}.00$ </h2>) : (
-        <>
-          <h2>
-            Tip: {orderTotal[2]}.00$
-          </h2>
-          <h2> Total: {orderTotal[1]}.00$ </h2>
-        </>
-      )}
-      {!orderStatus[0] ? (<Button onClick={payButton}>Go to payment</Button>) : <p> </p>}
     </>
   );
 }
