@@ -3,48 +3,49 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
-import { createOrder, getOrderDetails, updateOrder } from '../../api/orderAPI';
+import { createOrder, editOrder } from '../../api/orderAPI';
 import getOrderTypes from '../../api/orderTypeAPI';
 
 const initialState = {
   customerName: '',
   customerPhone: '',
   customerEmail: '',
-  orderTypeId: 1,
+  orderTypeId: 0,
 };
 
 function CreateOrderForm({ orderObj }) {
-  const [formInput, setFormInput] = useState(initialState);
+  const [formInput, setFormInput] = useState({});
   const [orderTypes, setOrderTypes] = useState([]);
   const router = useRouter();
 
   useEffect(() => {
     if (orderObj.id) {
-      getOrderDetails(orderObj.id).then(setFormInput);
+      setFormInput(orderObj);
+      console.warn(orderObj);
     }
     getOrderTypes().then(setOrderTypes);
   }, [orderObj]);
 
+  console.warn(formInput);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+    const parsedValue = name === 'orderTypeId' ? Number(value) : value;
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
+      [name]: parsedValue,
       dateCreated: new Date(),
     }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const action = orderObj.id ? updateOrder : createOrder;
-    action(formInput)
-      .then(() => {
-        router.push('/orders');
-      })
-      .catch((error) => {
-        console.error('Failed to create order', error);
-      });
-    console.warn(formInput);
+    if (orderObj.id) {
+      editOrder(formInput, orderObj.id).then(() => router.push('/orders'));
+    } else {
+      createOrder(formInput)?.then(() => router.push('/orders'));
+    }
   };
 
   return (
@@ -91,13 +92,14 @@ function CreateOrderForm({ orderObj }) {
         className="mb-3 chooseOrderType"
         value={formInput.orderTypeId}
         required
-      >
+      > <option value={null} disabled selected label="Select" />
         {
           orderTypes.map((orderType) => (
             <option
               key={orderType.id}
               value={orderType.id}
               label={orderType.type}
+              required
             />
           ))
         }

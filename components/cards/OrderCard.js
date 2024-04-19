@@ -8,6 +8,7 @@ import { deleteOrder } from '../../api/orderAPI';
 function OrderCard({ orderObj, onUpdate }) {
   const router = useRouter();
   const pushToDetails = () => { router.push(`/order/${orderObj.id}`); };
+  const editOrder = () => { router.push(`/order/edit/${orderObj.id}`); };
 
   const deleteThisOrder = () => {
     if (window.confirm(`Delete ${orderObj.customerName}'s order?`)) {
@@ -36,6 +37,8 @@ function OrderCard({ orderObj, onUpdate }) {
         <Button variant="secondary" className="orderCardBtn" onClick={pushToDetails}>View Order</Button>
         {orderObj.isClosed ? (
           <p> </p>) : <Button variant="secondary" className="orderCardDeleteBtn" onClick={deleteThisOrder}>Delete</Button>}
+        {orderObj.isClosed ? (
+          <p> </p>) : <Button variant="outline-dark" className="editOrderCardBtn" onClick={editOrder}>Edit Order</Button>}
       </Card.Body>
     </Card>
   );
