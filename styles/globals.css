@@ -133,6 +133,9 @@ text-align: center;
 .orderItemCard{
   margin: 20px;
 }
+.editOrderCardBtn{
+  margin-top: 5px;
+}
 .itemCard{
   display: flex;
   flex-direction: column;
